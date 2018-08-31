@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>vue todo list</title>
+  <style>
+    ul{
+      padding: 0;
+    }
+    li{
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .isFinished{
+      text-decoration: line-through;
+      color: #999999;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h3>{{title}}</h3>
+    <input type="text" placeholder="请输入备忘事项后回车保存" @keyup.enter="addItem" v-model="newItem" />
+    <ul>
+      <li v-for="(item, index) in items" v-bind:class="{isFinished: item.finished}">
+        <input type="checkbox" @click="changeStatus(index)" />{{item.text}}
+        <button @click="deleteItem(index)">删除</button>
+      </li>
+    </ul>
+  </div>
+  <script src="https://vuejs.org/js/vue.min.js"></script>
+  <script>
+    var app = new Vue({
+      el: "#app",
+      data: {
+        title: "备忘列表",
+        items: [],
+        newItem: ''
+      },
+      methods: {
+        addItem: function(){
+          this.items.push({
+            text: this.newItem,
+            finished: false
+          });
+
+          this.newItem = '';
+        },
+        deleteItem: function(index){
+          /*删除数组指定项*/
+          this.items.splice(index, 1);
+        },
+        changeStatus: function(index){
+          let curStatus = this.items[index].finished;
+          this.items[index].finished = !curStatus;
+        }
+      }
+    });
+  </script>
+</body>
+</html>

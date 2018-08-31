@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>收益详情</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+    <script type="text/javascript" src="https://vuejs.org/js/vue.min.js"></script>
+</head>
+<body id="app">
+    <header class="page-header" id="pageHeader">
+        <div class="page-header-home"><a href="/weixin/index"></a></div>
+        <div class="page-header-title">{{title}}</div>
+    </header>
+
+    <div class="earning-wrap">
+        <div class="account-list-menu without-icon">
+            <ul id="earningList" class="earning-list">
+                <li v-for="item in lists">
+                    <div class="menu-content">
+                        <span>{{item.date}}</span>
+                        <span class="pull-right">+{{item.earningAmount}}</span>
+                    </div>
+                </li>
+            </ul>
+            <form @submit.prevent v-if="showAddMore">
+                <input type="text" id="newDate" v-model="newItem.date" />
+                <input type="text" id="newAmount" v-model="newItem.earningAmount" />
+                <input type="submit" id="addNewBtn" value="新增" @click="addMore" />
+            </form>
+            <!--<div class="earnings-empty"></div>-->
+            <a href="javascript:;" id="earningMore" class="earning-more" data-text="点击加载更多" @click="showAddMoreForm">点击加载更多</a>
+        </div>
+    </div>
+
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                title: '收益详情',
+                lists: [
+                    {"date": "昨天", "earningAmount": 0.27},
+                    {"date": "2017-06-24", "earningAmount": 0.27},
+                    {"date": "2017-06-23", "earningAmount": 0.27},
+                    {"date": "2017-06-22", "earningAmount": 0.27},
+                    {"date": "2017-06-21", "earningAmount": 0.27},
+                    {"date": "2017-06-20", "earningAmount": 0.27},
+                    {"date": "2017-06-19", "earningAmount": 0.27},
+                    {"date": "2017-06-18", "earningAmount": 0.27},
+                    {"date": "2017-06-17", "earningAmount": 0.27},
+                    {"date": "2017-06-16", "earningAmount": 0.27}
+                ],
+                newItem: {
+                    "date": null,
+                    "earningAmount": null
+                },
+                showAddMore: false
+            }/*,
+            computed: {
+                lists: function(val){
+                    var newObject = {"date": "2017-06-／＊4", "earningAmount": 0.27};
+                    this.lists = this.lists.push(newObject);
+                }
+            }*/,
+            methods: {
+                addMore: function(){
+                    this.lists.push(this.newItem);
+                    /*新增完后，清空newItem对象*/
+                    this.newItem = {"date":null, "earningAmount": null};
+                },
+                showAddMoreForm: function(){
+                    this.showAddMore = true;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

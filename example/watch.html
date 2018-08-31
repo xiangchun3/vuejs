@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vue watch Demo</title>
+    <script type="text/javascript" src="https://vuejs.org/js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>{{fullName}}</p>
+    </div>
+    <script>
+        // watch方法
+        var app = new Vue({
+            el: '#app',
+            data: {
+                firstName: "Foo",
+                lastName : "Bar",
+                fullName : "Foo Bar"
+            },
+            // 数据变动时，当一些数据需要根据其它数据变化时
+            watch: {
+                firstName: function(val){
+                    this.fullName = val + " " + this.lastName;
+                },
+                lastName: function(val){
+                    this.fullName = this.firstName + " " + val;
+                }
+            }
+        });
+
+        // 另一种更好的方法
+        // var app = new Vue({
+        //     el: '#app',
+        //     data: {
+        //         firstName: "Foo",
+        //         lastName : "Bar"
+        //     },
+        //     //实时计算：数据发生变动时就会执行对相应数据有引用的函数
+        //     computed: {
+        //         fullName: function(val){
+        //             return this.firstName + ' ' + this.lastName;
+        //         }
+        //     }
+        // });
+    </script>
+</body>
+</html>

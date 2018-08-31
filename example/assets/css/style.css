@@ -1,0 +1,130 @@
+.page-header {
+    position: relative;
+    width: 100%;
+    height: 45px;
+    background: #ff632c;
+}
+
+.earning-more {
+    display: block;
+    margin-top: 0px;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    color: #aaa;
+    font-size: 15px;
+}
+
+.earning-list {
+    margin-top: -10px;
+    padding-bottom: 20px;
+}
+
+.earning-wrap {
+    padding-bottom: 40px;
+}
+
+.earning-notice {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    bottom: 10px;
+    font-size: 12px;
+}
+
+.earnings-empty {
+    padding-bottom: 60%;
+    background: url(../../../img/v2/icons/empty.png) no-repeat center bottom;
+    background-size: 28% auto;
+}
+
+.earning-wrap .page-loading {
+    margin-top: 0;
+    padding-top: 10px;
+    min-height: 38px;
+    overflow: hidden;
+}
+
+.account-list-menu {
+    margin-top: 10px;
+}
+
+.account-list-menu ul {
+    list-style: none;
+    margin-bottom: 0;
+    padding-left: 0;
+}
+
+.account-list-menu ul li {
+    padding-left: 48px;
+    color: #676767;
+    background-color: #fff;
+}
+
+.account-list-menu ul li .account-icon-dot {
+    padding-left: 5px;
+    color: #f00;
+    font-size: 12px;
+}
+
+.account-list-menu.without-icon ul li {
+    padding-left: 15px;
+}
+
+.account-list-menu ul li .menu-content {
+    position: relative;
+    padding: 15px 0 14px;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+.account-list-menu ul li .menu-content:after {
+    content: '';
+    display: block;
+    height: 0;
+    clear: both;
+}
+
+.account-list-menu ul li .menu-content.no-border {
+    border-bottom: none;
+}
+
+.account-list-menu ul li .menu-content .sub {
+    font-size: 12px;
+    margin-top: 8px;
+    color: #c8c8c8;
+}
+
+.account-list-menu ul li.margin-bottom-10 {
+    margin-bottom: 10px;
+}
+
+.account-list-menu ul li .account-icon {
+    position: absolute;
+    left: -35px;
+}
+
+.account-list-menu ul li .pull-right {
+    position: relative;
+    margin-right: 20px;
+    color: #9c9c9c;
+}
+
+.account-list-menu ul li .pull-right.orange {
+    color: #ff632c;
+}
+
+.account-list-menu ul li .pull-right.green {
+    color: #22ac38;
+}
+
+.account-list-menu ul li .pull-right.red {
+    color: #ff2020;
+}
+
+.account-list-menu ul li .icon-arrow-right {
+    margin-left: 4px;
+}
+
+.pull-right {
+    float: right;
+}

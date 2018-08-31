@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vue Demo</title>
+    <script type="text/javascript" src="https://vuejs.org/js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for='todo in todos'>
+                {{todo.text}}
+            </li>
+        </ul>
+        <input type="text" v-model="message" />
+        <input type="button" id="reset" value="reset" v-on:click="resetText()" />
+        <p>{{message}}</p>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello Vue.js!',
+                todos: [
+                    { text: 'Learn JavaScript' },
+                    { text: 'Learn Vue.js' },
+                    { text: 'Build Something Awesome' }
+                ]
+            },
+            methods: {
+                resetText: function(){
+                    this.message = 'Hello Vue.js!';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

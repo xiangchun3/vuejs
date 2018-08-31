@@ -1,0 +1,637 @@
+@charset "utf-8";
+
+/**
+ * css reset代码
+ * loading、header、footer样式
+ * 页面box代码
+ */
+
+
+/*reset css*/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 100%;
+}
+
+form {
+    display: inline;
+}
+
+ul,
+ol,
+dl,
+li,
+dd,
+dt {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+img {
+    vertical-align: middle;
+    -ms-interpolation-mode: bicubic;
+    border: 0;
+}
+
+button,
+input,
+select,
+textarea {
+    font-size: 100%;
+    vertical-align: middle;
+    outline: none;
+}
+
+textarea {
+    resize: none;
+}
+
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+    cursor: pointer;
+    -webkit-appearance: button;
+    -moz-appearance: button;
+}
+
+input:focus:-moz-placeholder,
+input:focus::-webkit-input-placeholder {
+    font-size: 12px;
+    color: transparent;
+}
+
+
+/*隐藏number右边上下箭头*/
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    margin: 0;
+    -webkit-appearance: none;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+}
+
+input::-webkit-input-placeholder {
+    font-size: 12px;
+    color: #dfdfdf;
+}
+
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+td,
+th {
+    padding: 0;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    padding: 0;
+    margin: 0;
+    font-weight: normal;
+}
+
+em,
+i {
+    font-style: normal;
+}
+
+ins {
+    text-decoration: none;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+html,
+body {
+    max-width: 640px;
+    min-width: 320px;
+    padding: 0;
+    margin: 0 auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    font-family: "Helvetica Neue", Helvetica, STHeiTi, sans-serif, Arial;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: none;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+}
+
+a {
+    text-decoration: none;
+    outline: none;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.page-container {
+    min-height: calc(100% - 45px);
+    min-height: -webkit-calc(100% - 45px);
+    position: relative;
+}
+
+.clearfix {
+    zoom: 1;
+}
+
+.clearfix:after {
+    content: '.';
+    display: block;
+    visibility: hidden;
+    clear: both;
+    height: 0px;
+}
+
+
+/*page->loading*/
+
+.page-loading {
+    position: relative;
+    min-width: 60px;
+    min-height: 60px;
+    margin-top: 50px;
+}
+
+.page-loading:after {
+    position: absolute;
+    top: 35px;
+    left: 50%;
+    width: 100px;
+    height: 20px;
+    margin-left: -40px;
+    overflow: hidden;
+    font-size: 12px;
+    font-weight: 100;
+    content: "努力加载中...";
+    text-align: center;
+    color: #bbb;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 1);
+}
+
+.page-loading b {
+    position: absolute;
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    content: "";
+    -webkit-animation: spinner .6s linear infinite;
+    animation: spinner .6s linear infinite;
+    border-top: 2px solid #fd7500;
+    border-right: 2px solid transparent;
+    border-radius: 50%;
+}
+
+.loading-more {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    min-height: 40px;
+}
+
+.loading-more b {
+    margin-top: 12px;
+    margin-left: -54px;
+}
+
+.loading-more:after {
+    content: '正在加载更多...';
+    position: absolute;
+    top: 0;
+    text-shadow: none;
+    color: #666;
+    height: 40px;
+    line-height: 40px;
+}
+
+.loading-btn {
+    margin-top: 0;
+    height: 40px;
+    top: 15px;
+    overflow: hidden;
+}
+
+.loading-btn b {
+    border-top: 2px solid #FFF;
+}
+
+.loading-btn:after {
+    content: '';
+}
+
+@keyframes spinner {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spinner {
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+.page-loading-error {
+    height: 35px;
+    padding-top: 30px;
+    font-size: 14px;
+    line-height: 35px;
+    text-align: center;
+    color: #999;
+}
+
+.page-loading-error:after {
+    content: "";
+}
+
+.page-loading-error a {
+    padding: 0 3px;
+    text-decoration: none;
+    color: #fd7500;
+}
+
+
+/*loading activity*/
+
+.loading {
+    width: 100px;
+    height: 100px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin-left: -50px;
+    margin-top: -40px;
+    background: #eee;
+    border-radius: 100%;
+    z-index: 9999;
+    opacity: 0.8;
+    /*box-shadow:0 0 15px rgba(0,0,0,0.2);*/
+    overflow: hidden;
+}
+
+.loading:after {
+    content: '努力加载中...';
+    font-size: 12px;
+    color: #4d4d4d;
+    width: 100px;
+    text-align: center;
+    font-weight: 100;
+    margin-left: -50px;
+    margin-top: 10px;
+    height: 20px;
+    overflow: hidden;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}
+
+.loading b {
+    position: absolute;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    content: '';
+    border-radius: 50%;
+    border-top: 2px solid #fd7500;
+    border-right: 2px solid transparent;
+    -webkit-animation: spinner .6s linear infinite;
+    animation: spinner 0.6s linear infinite;
+    margin-left: -10px;
+    top: 20px;
+}
+
+.loading-mask {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 9998;
+    background: rgba(0, 0, 0, 0.2)
+}
+
+@keyframes spinner {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spinner {
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+
+/*header*/
+
+.page-header {
+    position: relative;
+    width: 100%;
+    height: 45px;
+    background: #ff632c;
+}
+
+.page-header-logo {
+    position: absolute;
+    top: 7px;
+    left: 12px;
+    width: 100px;
+    height: 36px;
+    background: url(../../img/v2/logo.png#base64) left top no-repeat;
+    background-size: auto 30px;
+}
+
+.page-header-bar {
+    position: absolute;
+    top: 2px;
+    right: 10px;
+}
+
+.page-header-bar a {
+    display: inline-block;
+    height: 43px;
+    font-size: 10px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    margin-left: 8px;
+}
+
+.page-header-bar a span {
+    display: block;
+    width: 20px;
+    height: 20px;
+    margin: 3px auto;
+    overflow: hidden;
+    border: #fff solid 1px;
+    border-radius: 100%;
+    background: #ffb196 url(../img/user_icon.png#base64) center center no-repeat;
+    background-size: auto 80%;
+}
+
+.page-header-bar a.member span {
+    background: #ffb196 url(../img/member_icon.png#base64) center center no-repeat;
+    background-size: auto 80%;
+}
+
+.page-header-title {
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    width: 140px;
+    height: 36px;
+    margin-left: -70px;
+    font-size: 16px;
+    line-height: 36px;
+    text-align: center;
+    /*text-transform: uppercase;*/
+    color: #fff;
+}
+
+.page-header-home {
+    position: absolute;
+    top: 7px;
+    left: 12px;
+    width: 100px;
+    height: 36px;
+    background: url(../images/home.png#base64) left 26% no-repeat;
+    background-size: auto 24px;
+}
+
+.page-header-logo a,
+.page-header-home a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+
+/*account-header*/
+
+.account-header {
+    background: #ff632c;
+    color: #fff;
+    position: relative;
+    height: 46px;
+    line-height: 46px;
+    width: 100%;
+}
+
+.account-header-gap {
+    border-left: 2px solid #fff;
+    height: 14px;
+    margin-left: 2px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.account-header-left {
+    height: 100%;
+    width: 30%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.account-header-left a {
+    color: #fff;
+    height: 100%;
+    display: block;
+    background: url(../images/home.png#base64) 10px 10px no-repeat;
+    background-size: auto 24px;
+    white-space: nowrap;
+}
+
+.account-header-left a span {
+    margin-left: 44px;
+    padding-left: 10px;
+    font-size: 14px;
+    color: #fff;
+    border-left: #fff solid 2px;
+}
+
+.account-header-left a.account-header-home {
+    background: url(../images/home.png#base64) 10px 10px no-repeat;
+    background-size: auto 24px;
+}
+
+.account-header-left a.account-header-back {
+    background: url(../img/back.png#base64) 10px 10px no-repeat;
+    background-size: auto 24px;
+}
+
+.account-header-mid {
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    height: 100%;
+    width: 40%;
+    position: absolute;
+    left: 30%;
+    top: 0;
+}
+
+.account-header-mid span {
+    font-weight: normal;
+}
+
+.account-header-mid p {
+    line-height: 22px;
+    font-size: 14px;
+    height: 22px;
+    overflow: hidden;
+}
+
+.account-header-mid p:nth-child(1) {
+    padding-top: 2px;
+}
+
+.account-header-right {
+    height: 100%;
+    width: 30%;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.account-header-right a,
+.account-header-right span {
+    color: #fff;
+    display: block;
+    height: 100%;
+    padding-right: 15px;
+    text-align: right;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.account-header-right a.account-header-my {
+    font-size: 10px;
+    line-height: 20px;
+    float: right;
+    padding: 0;
+    margin: 0 10px 0 0;
+}
+
+.account-header-right a.account-header-my:before {
+    content: "";
+    display: block;
+    margin: 4px auto 0 auto;
+    width: 18px;
+    height: 19.5px;
+    border: solid 1px #fff;
+    border-radius: 50%;
+    background: url(../img/user_icon.png#base64) center center no-repeat #ffb196;
+    background-size: 80% 80%;
+}
+
+
+/*数据为空*/
+
+.record-empty {
+    background: url(../img/empty.png) center center no-repeat;
+    background-size: 20% auto;
+    height: 200px;
+}
+
+
+/*顶部提示*/
+
+.page-top-tips {
+    display: block;
+    background: #fcebd3;
+    padding: 6px 25px 6px 10px;
+    font-size: 14px;
+    color: #6b6d6f;
+    line-height: 18px;
+    position: relative;
+}
+
+.page-top-tips span {
+    color: #ff3939;
+    padding: 2px 5px 0 0;
+    font-size: 16px;
+    float: left;
+}
+
+.page-top-tips i {
+    position: absolute;
+    right: 10px;
+    top: 0;
+    width: 20px;
+    height: 100%;
+    background: url(../img/arrow.png#base64) right center no-repeat;
+    background-size: 15px auto;
+}
+
+@media all and (max-width:350px) {
+    .page-top-tips {
+        font-size: 12px;
+    }
+}
+
+
+/*图片*/
+
+.img-inline {
+    width: 100%;
+    overflow: hidden;
+}
+
+.img-inline img {
+    width: 100%;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.hide {
+    display: none;
+}
+
+.hidden {
+    visibility: hidden;
+}

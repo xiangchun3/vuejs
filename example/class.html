@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>使用v-bind:绑定class</title>
+    <script type="text/javascript" src="https://vuejs.org/js/vue.min.js"></script>
+    <style type="text/css">
+        .black{color: black;}
+        .big{font-size: 20px;}
+        .bold{font-weight: bold;}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- v-bind:class指令可以与普通class属性并存 -->
+        <p class="black" v-bind:class="{big: bigFont, bold: boldFont}">绑定class</p>
+        <input type="button" value="放大" v-on:click="useBigFont" />
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                bigFont: false,
+                boldFont: false
+            },
+            methods: {
+                useBigFont: function(){
+                    this.bigFont = true;
+                    this.boldFont = true;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
