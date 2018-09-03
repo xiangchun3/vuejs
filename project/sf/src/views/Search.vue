@@ -20,7 +20,19 @@
         <a href="all">活动</a>
       </div>
     </div>
-    <span>{{count}}</span>
+    <div class="search-result">
+      <span>登录状态：{{loginStatus}}</span>
+      <h3 v-show="result">查找{{q}}，找到约 {{result.length}} 条结果</h3>
+      <div v-for="item in result" class="result-item">
+        <h2>
+          <span v-if="item.isFixed" class="label-success">解决</span>
+          <a href="#" v-html="highlightTitle(item.title)"></a>
+        </h2>
+        <!-- <a href="/q/1010000003713912" target="_blank">ubuntu上怎么设置默认<strong class="key">python</strong>命令是执行<strong class="key">python</strong>3而不是<strong class="key">python</strong>2</a> -->
+        <p>{{item.des}}</p>
+        <p>{{item.vote}}投票 {{item.answer}}答案</p>
+      </div>
+    </div>
     <SfBottom></SfBottom>
   </div>
 </template>
@@ -30,13 +42,19 @@ import axios from 'axios';
 export default {
   data () {
     return {
-      count: this.$store.state.count,
-      q: ''
+      loginStatus: this.$store.state.loginStatus,
+      q: '',
+      result: '',  // 查询结果
     }
   },
+
   methods: {
-    // 如果使用箭头函数无法获取vue实例对象this
+    // 注意：如果使用箭头函数无法获取vue实例对象this
     search: function () {
+      if(this.q == ''){
+        return;
+      }
+      let that = this;
       // 请求被webpack-api-mocker拦截到本地mock文件
       axios({
         method: 'post',
@@ -44,7 +62,17 @@ export default {
         data: {
           q: this.q
         }
+      }).then(function(response){
+        that.result = response.data;
       })
+    },
+    // 标题关键字高亮显示
+    highlightTitle: function(title){
+      let keyReg = new RegExp(this.q, 'g');
+
+      return title.replace(keyReg, function(key){
+        return "<strong class='key'>" + key + "</strong>"
+      });
     }
   }
 }
@@ -99,4 +127,44 @@ export default {
       }
     }
   }
+  .search-result{
+    margin: 1rem;
+    h3{
+      color: #757575;
+      font-weight: normal;
+      font-size: 1rem;
+    }
+    .result-item{
+      margin: 2rem 0;
+      h2{
+        font-size: 1rem;
+        font-weight: normal;
+        a{
+          color: #009a61;
+        }
+        .label-success{
+          font-size: .75rem;
+          color: #fff;
+          background-color: #5cb85c;
+          padding: .2rem .5rem;
+          display: inline-block;
+          border-radius: 3px;
+        }
+      }
+      p{
+        color: #666;
+        font-size: .8125rem;
+        line-height: 1.2rem;
+      }
+    }
+  }
 </style>
+
+<!-- 全局样式,不受scoped影响 -->
+<style>
+  .search-result .result-item h2 a .key{
+    color: #D0021B;
+    font-weight: bold;
+  }
+</style>
+
