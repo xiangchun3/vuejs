@@ -10,8 +10,10 @@ const store = new Vuex.Store({
     loginStatus: false
   },
   mutations: {
-    add: function(state){
-      state.count += 1;
+    add: state => state.count++,
+    // 用户登录状态更新
+    changeLoginStatus: (state, v) => {
+      state.loginStatus = v;
     }
   }
 })

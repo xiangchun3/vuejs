@@ -64,7 +64,8 @@ module.exports = {
     // 配置以下类型文件可缩写后缀
     extensions: ['.js', '.vue', '.json'],
     alias: {
-      vue: 'vue/dist/vue.js'
+      vue: 'vue/dist/vue.js',
+      '@': path.resolve(__dirname, './src')
     }
   },
   devServer: {

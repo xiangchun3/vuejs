@@ -12,22 +12,78 @@
       <div class="panel-body">
         <div class="form-group">
           <label for="">手机号或Email</label>
-          <input type="text" class="form-text" />
+          <input type="text" class="form-text" placeholder="11 位手机号 或 Email" autocomplete="off" id="username" name="username" v-model="username" v-validate="'required|username'" />
+          <p class="error-tips" v-show="errors.has('username')">{{ errors.first('username') }}</p>
         </div>
         <div class="form-group">
           <label for="">密码</label><a href="#" class="pull-right">忘记密码</a>
-          <input type="text" class="form-text" />
+          <input type="password" class="form-text" placeholder="请输入密码" autocomplete="off" id="password" name="password" v-model="password" v-validate="'required|password_1'" />
+          <p class="error-tips" v-show="errors.has('password')">{{ errors.first('password') }}</p>
         </div>
         <div class="form-group">
           <a href="#">手机验证码登录</a>
         </div>
         <div class="form-group">
-          <a href="#" class="login-btn">登录</a>
+          <a href="javascript:;" class="login-btn" @click="valid">登录</a>
         </div>
+        登录状态：{{this.$store.state.loginStatus}}
       </div>
     </div>
   </div>
 </template>
+
+<script>
+import axios from 'axios';
+import "@/utils/validate.js";
+import { Toast } from 'mint-ui';
+import 'mint-ui/lib/style.css'
+export default {
+  data () {
+    return {
+      username: null,
+      password: null
+    }
+  },
+  methods: {
+    // 登录请求
+    login: function(){
+      let that = this;
+      axios({
+        method: 'post',
+        url: '/login',
+        data: {
+          username: that.username,
+          password: that.password
+        }
+      }).then(function(response){
+        let result = response.data;
+        if(result.data == 'success'){
+          Toast(result.message);
+          // 如果登录成功，则将返回token值保存到session中，所有请求头中使用，用于判断登录是否登录
+          result.token && sessionStorage.setItem("loginStatus", true);
+          that.$store.commit("changeLoginStatus", true);
+          // 登录成功，跳转到首页
+          that.$router.push('/');
+        }
+      });
+    },
+    // 登录前验证
+    valid: function(){
+      let that = this;
+      that.$validator.validateAll().then(flag => {
+        if (flag) {
+          that.login();
+        } else {
+          console.log(this.errors);
+          // debugger
+          // Toast(this.errors.items[0].msg);
+        }
+      });
+    }
+  }
+}
+</script>
+
 
 <style lang="scss" scoped>
   .container{
@@ -74,6 +130,7 @@
         margin-top: 0;
         margin-bottom: 0;
         font-size: 16px;
+        font-weight: normal;
         color: inherit;
       }
     }
@@ -87,6 +144,7 @@
         label{
           color: #333333;
           font-size: .875rem;
+          font-weight: bold;
           margin-bottom: 5px;
           display: inline-block;
         }
@@ -113,21 +171,25 @@
           -o-transition: border-color ease-in-out 0.15s,box-shadow ease-in-out 0.15s;
           transition: border-color ease-in-out 0.15s,box-shadow ease-in-out 0.15s;
         }
+        .login-btn{
+          color: #fff;
+          background-color: #009a61;
+          border-color: #008151;
+          display: block;
+          text-align: center;
+          text-decoration: none;
+          cursor: pointer;
+          border: 1px solid transparent;
+          border-radius: 4px;
+          padding: 6px 12px;
+          font-size: .875rem;
+          line-height: 1.42858rem;
+        }
+        .error-tips{
+          color: #cf0707;
+          font-size: .875rem;
+        }
       }
-    }
-    .login-btn{
-      color: #fff;
-      background-color: #009a61;
-      border-color: #008151;
-      display: block;
-      text-align: center;
-      text-decoration: none;
-      cursor: pointer;
-      border: 1px solid transparent;
-      border-radius: 4px;
-      padding: 6px 12px;
-      font-size: .875rem;
-      line-height: 1.42858rem;
     }
   }
 

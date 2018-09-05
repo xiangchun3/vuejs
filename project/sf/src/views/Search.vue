@@ -26,7 +26,7 @@
       <div v-for="item in result" class="result-item">
         <h2>
           <span v-if="item.isFixed" class="label-success">解决</span>
-          <a href="#" v-html="highlightTitle(item.title)"></a>
+          <a :href=item.link v-html="highlightTitle(item.title)"></a>
         </h2>
         <!-- <a href="/q/1010000003713912" target="_blank">ubuntu上怎么设置默认<strong class="key">python</strong>命令是执行<strong class="key">python</strong>3而不是<strong class="key">python</strong>2</a> -->
         <p>{{item.des}}</p>
