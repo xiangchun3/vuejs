@@ -12,19 +12,19 @@
       <div class="panel-body">
         <div class="form-group">
           <label for="">手机号或Email</label>
-          <input type="text" class="form-text" placeholder="11 位手机号 或 Email" autocomplete="off" id="username" name="username" v-model="username" v-validate="'required|username'" />
+          <input type="text" class="form-text" placeholder="11 位手机号 或 Email" autocomplete="off" tabindex="1" id="username" name="username" v-model="username" v-validate="'required|username'" />
           <p class="error-tips" v-show="errors.has('username')">{{ errors.first('username') }}</p>
         </div>
         <div class="form-group">
           <label for="">密码</label><a href="#" class="pull-right">忘记密码</a>
-          <input type="password" class="form-text" placeholder="请输入密码" autocomplete="off" id="password" name="password" v-model="password" v-validate="'required|password_1'" />
+          <input type="password" class="form-text" placeholder="请输入密码" autocomplete="off" tabindex="2" id="password" name="password" v-model="password" v-validate="'required|password_1'" />
           <p class="error-tips" v-show="errors.has('password')">{{ errors.first('password') }}</p>
         </div>
         <div class="form-group">
           <a href="#">手机验证码登录</a>
         </div>
         <div class="form-group">
-          <a href="javascript:;" class="login-btn" @click="valid">登录</a>
+          <a href="javascript:;" class="login-btn" @click="valid" tabindex="3">登录</a>
         </div>
         登录状态：{{this.$store.state.loginStatus}}
       </div>
@@ -60,8 +60,9 @@ export default {
         if(result.data == 'success'){
           Toast(result.message);
           // 如果登录成功，则将返回token值保存到session中，所有请求头中使用，用于判断登录是否登录
-          result.token && sessionStorage.setItem("loginStatus", true);
+          result.token && sessionStorage.setItem("token", result.token);
           that.$store.commit("changeLoginStatus", true);
+          that.$store.commit("refreshToken", result.token);
           // 登录成功，跳转到首页
           that.$router.push('/');
         }

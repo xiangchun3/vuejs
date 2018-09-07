@@ -2,8 +2,8 @@
   <div class="banner-wrapper">
     <mt-swipe :auto="5000">
       <mt-swipe-item v-for="item in items" :key="item.id">
-        <a :href="item.href" rel="external nofollow" class="banner-bg">
-          <img :src="item.url" class="img"/>
+        <a :href="item.href" rel="external nofollow" class="banner-bg" :style="{'background-image': 'url('+item.url+')'}">
+          <!-- <img :src="item.url" class="img"/> -->
           <span class="desc">{{item.title}}</span>
         </a>
       </mt-swipe-item>
@@ -53,22 +53,21 @@ export default {
     height: 100%;
   }
   .mint-swipe {
-    height: 218px;
+    height: 150px;
   }
   .banner-bg{
+    width: 100%;
+    height: 150px;
     background: center center no-repeat;
-    background-size: contain;
+    background-size: cover;
+    display: block;
   }
   .desc {
-    font-weight: 600;
-    opacity: 0.9;
     padding: 5px;
-    height: 20px;
-    line-height: 20px;
     width: 100%;
     color: #fff;
-    background-color: gray;
+    font-size: 1.5rem;
     position: absolute;
-    bottom: 0;
+    bottom: 1.5rem;
   }
 </style>

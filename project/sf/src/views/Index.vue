@@ -4,9 +4,6 @@
     <div class="wrapper">
       <div class="router-box">
         <HotLink></HotLink>
-        <!-- 用户信息：<span>{{count}}</span>
-        登录状态：{{$store.state.loginStatus}}
-        <input type="button" value="count+" @click="$store.commit('add')" /> -->
       </div>
       <!-- 轮播 -->
       <Banner></Banner>
@@ -21,11 +18,6 @@
 import List from '../components/List';
 import Banner from '../components/Banner';
 export default {
-  // data () {
-  //   return {
-  //     count: store.state.count
-  //   }
-  // },
   components: {
     List,
     Banner

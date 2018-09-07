@@ -9,11 +9,12 @@ import routes from './router';
 import components from './components';
 import store from './store';  // vuex 状态管理
 
-let token = sessionStorage.getItem("loginStatus");
+let token = sessionStorage.getItem("token");
 
 // 初始化时，如果session包含token，则用户为登录状态
 if(token){
   store.commit("changeLoginStatus", true);
+  store.commit("refreshToken", token);
 }
 
 Vue.use(VueRouter);

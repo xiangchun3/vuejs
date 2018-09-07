@@ -23,7 +23,8 @@
       // 登出
       logout () {
         this.$store.commit("changeLoginStatus", false);
-        sessionStorage.removeItem("loginStatus");
+        this.$store.commit("refreshToken", '');
+        sessionStorage.removeItem("token");
         this.$router.push('/login');
       }
     }

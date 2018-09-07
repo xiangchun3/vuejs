@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import axios from 'axios';
 
 Vue.use(Vuex);
 
@@ -7,13 +8,20 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
     count: 1,
-    loginStatus: false
+    loginStatus: false,
+    token: ''
   },
   mutations: {
     add: state => state.count++,
     // 用户登录状态更新
     changeLoginStatus: (state, v) => {
       state.loginStatus = v;
+    },
+    // 更新token值
+    refreshToken: (state, v) => {
+      state.token = v;
+      // 为所有axios请求头增加token
+      axios.defaults.headers.common['Token'] = v;
     }
   }
 })

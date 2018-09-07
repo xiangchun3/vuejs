@@ -3,25 +3,31 @@
     <div class="feed-options">
       <h3>我的订阅<small>只看推荐</small></h3>
     </div>
-    <div class="news-item" v-for="item in list">
-      <p>来自标签<a href="#">{{item.tags}}</a></p>
-      <h4>{{item.title}}</h4>
-      <p class="item-text">{{item.text}}</p>
-      <p class="author-info">
-        <span>
-          <span class="wrap"><i class="fa fa-thumbs-up"></i></span>
-          <span class="votes-num">x {{item.votesNum}}</span>
-          赞
-        </span>
-        <span><a href="#">{{item.author}}</a></span>
-        <span>{{item.time}}</span>
-      </p>
+    <div v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="10">
+      <div class="news-item" v-for="item in list">
+        <p>来自标签<a href="#">{{item.tags}}</a></p>
+        <h4>{{item.title}}</h4>
+        <p class="item-text">{{item.text}}</p>
+        <p class="author-info">
+          <span>
+            <span class="wrap"><i class="fa fa-thumbs-up"></i></span>
+            <span class="votes-num">x {{item.votesNum}}</span>
+            赞
+          </span>
+          <span><a href="#">{{item.author}}</a></span>
+          <span>{{item.time}}</span>
+        </p>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import Vue from 'vue';
 import axios from 'axios';
+import { InfiniteScroll } from 'mint-ui';
+
+Vue.use(InfiniteScroll);
 export default {
   name: 'List',
   data () {
@@ -30,7 +36,16 @@ export default {
     }
   },
   methods: {
-    
+    loadMore() {
+      this.loading = true;
+      setTimeout(() => {
+        let last = this.list[this.list.length - 1];
+        for (let i = 1; i <= 10; i++) {
+          this.list.push(last);
+        }
+        this.loading = false;
+      }, 2500);
+    }
   },
   mounted () {
     let that = this;
