@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "axios-mock-adapter": "^1.15.0",
     "css-loader": "^1.0.0",
     "file-loader": "^2.0.0",
